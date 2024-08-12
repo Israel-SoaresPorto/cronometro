@@ -1,4 +1,4 @@
-import timer from "./timer.js";
+import display from "./display.js";
 import button from "./button.js";
 
 export default function cronometer() {
@@ -6,7 +6,7 @@ export default function cronometer() {
   cronometerPage.classList.add("cronometer");
 
   cronometerPage.innerHTML = `
-      ${timer().innerHTML} 
+      ${display().innerHTML} 
       <div class="controls">
         ${button("play", "play", false).outerHTML}
         ${button("pause", "pause", true).outerHTML}

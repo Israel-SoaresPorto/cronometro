@@ -1,9 +1,9 @@
-export default function timer() {
+export default function display() {
     const timerPage = document.createElement("div");
     timerPage.classList.add("timer");
 
     timerPage.innerHTML = `
-        <div class="timer">
+        <div class="display">
             <span id="hours">00</span>
             <span class="colon">:</span>
             <span id="minutes">00</span>
