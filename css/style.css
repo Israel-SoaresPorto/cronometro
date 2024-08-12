@@ -1,0 +1,115 @@
+@font-face {
+  font-family: "Ds-Digital";
+  src: url("../assets/fonts/DS-DIGI.TTF");
+  src: url("../assets/fonts/DS-DIGIB.TTF");
+  src: url("../assets/fonts/DS-DIGII.TTF");
+  src: url("../assets/fonts/DS-DIGIT.TTF");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  background-color: #000000;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+}
+
+.timer {
+  font-family: "Ds-Digital", sans-serif;
+  font-size: 4em;
+  padding: 0.25em;
+  border: 0.05em solid #7c7a7a;
+  border-radius: 0.5em;
+  display: flex;
+}
+
+.timer span {
+  text-align: center;
+}
+
+.timer span:not(.colon) {
+  width: 1.25em;
+}
+
+#miliseconds {
+  width: 1.7em;
+}
+
+.colon {
+  width: 0.5em;
+}
+
+.controls {
+  display: flex;
+  gap: 1em;
+}
+
+.controls__button {
+  background-color: #e9e4e4;
+  color: #5f6368;
+  width: 6em;
+  padding: 0.5em;
+  border: none;
+  border-radius: 0.5em;
+  outline: none;
+  box-shadow: 0.1em 0.1em 0.25em #e9e4e4;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25em;
+}
+
+.partials {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+#partials-list {
+  width: 20em;
+  height: 15em;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+  scrollbar-color: transparent transparent;
+  scrollbar-width: thin;
+}
+
+.partial {
+  width: 12em;
+  font-family: "Ds-Digital", sans-serif;
+  background-color: #e9e4e4;
+  color: #000000;
+  font-size: 1.5em;
+  padding: 0.5em;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.partial span:first-child {
+  width: 1.5em;
+  padding: 0.25em;
+  color: #ffffff;
+  font-weight: bold;
+  background-color: #000000;
+}

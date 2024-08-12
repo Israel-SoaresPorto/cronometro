@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Cronometro</title>
+  </head>
+  <body>
+    <main class="container">
+      <div class="timer">
+        <span id="hours">00</span>
+        <span class="colon">:</span>
+        <span id="minutes">00</span>
+        <span class="colon">:</span>
+        <span id="seconds">00</span>
+        <span class="colon">:</span>
+        <span id="miliseconds">000</span>
+      </div>
+      <div class="controls">
+        <button id="play" class="controls__button">
+          <img src="assets/icons/play_circle.svg" alt="" />
+          <span>Play</span>
+        </button>
+        <button id="pause" class="controls__button" disabled>
+          <img src="assets/icons/pause_circle.svg" alt="" />
+          <span>Pause</span>
+        </button>
+        <button id="partial" class="controls__button" disabled>
+          <img src="assets/icons/flag_circle.svg" alt="" />
+          <span>Partial</span>
+        </button>
+        <button id="stop" class="controls__button" disabled>
+          <img src="assets/icons/stop_circle.svg" alt="" />
+          <span>Stop</span>
+        </button>
+      </div>
+      <div class="partials">
+        <h2>Partials</h2>
+        <div id="partials-list">
+
+        </div>
+      </div>
+    </main>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>
