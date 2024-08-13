@@ -1,0 +1,65 @@
+.timer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.timer__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5em;
+}
+
+.timer__inputs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.timer__form label {
+    font-size: 1.25em;
+    font-family: "Ds-Digital", sans-serif;
+    text-align: center;
+    margin-left: 0.25em;
+    margin-right: 1em;
+}
+
+.timer__form label:last-child {
+    margin-right: 0;
+}
+
+.timer__form input {
+    background-color: #e9e4e4;
+    width: 2.5em;
+    font-size: 1.5em;
+    text-align: center;
+    padding: 0.25em;
+    border: none;
+    outline: none;
+    border-radius: 0.5em;
+}
+
+.timer__form input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.timer__form button {
+    background-color: #e9e4e4;
+    padding: 0.5em;
+    font-size: 1em;
+    border: none;
+    outline: none;
+    border-radius: 0.5em;
+    cursor: pointer;
+}
+
+.timer__controls {
+    display: flex;
+    gap: 1em;
+}
+

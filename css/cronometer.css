@@ -11,7 +11,7 @@
 }
 
 #partials-list {
-  height: calc(100vh - 18em);
+  height: calc(90vh - 18em);
   margin-top: 1em;
   overflow-y: auto;
   scrollbar-color: transparent transparent;
@@ -46,6 +46,6 @@
 
 @media screen and (min-width: 27em) {
   #partials-list {
-    height: calc(100vh - 21em);
+    height: calc(90vh - 20em);
   }
 }
