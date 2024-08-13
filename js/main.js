@@ -1,14 +1,11 @@
-import cronometer from "./cronometer.js";
+import Cronometer from "./Cronometer.js";
 import timer from "./timer.js";
 
 const mainContainer = document.querySelector('.container');
-const cronometerButton = document.querySelector('#cronometer');
-const timerButton = document.querySelector('#timer');
 
-const cronometerPage = cronometer();
-const timerPage = timer();
+const cronometerPage = new Cronometer();
 
-cronometerButton.addEventListener('click', () => {
+/* cronometerButton.addEventListener('click', () => {
     mainContainer.innerHTML = '';
     mainContainer.appendChild(cronometerPage);
 });
@@ -16,6 +13,6 @@ cronometerButton.addEventListener('click', () => {
 timerButton.addEventListener('click', () => {
     mainContainer.innerHTML = '';
     mainContainer.appendChild(timerPage);
-});
+}); */
 
-mainContainer.appendChild(cronometerPage);
+mainContainer.appendChild(cronometerPage.render());

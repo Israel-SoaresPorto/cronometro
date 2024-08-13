@@ -1,4 +1,4 @@
-import button from "./button.js";
+import button from "./Button.js";
 
 export default function timer() {
   const timerPage = document.createElement("div");
