@@ -62,21 +62,23 @@ export default function cronometer() {
     displayHours.textContent = hours < 10 ? "0" + hours : hours;
   }
 
+  function disableButtons(...buttons) {
+    btnPlay.disabled = buttons.includes("play");
+    btnPause.disabled = buttons.includes("pause");
+    btnPartial.disabled = buttons.includes("partial");;
+    btnStop.disabled = buttons.includes("stop");
+  }
+
   btnPlay.addEventListener("click", () => {
     timeInit = Date.now() - elapsedTime;
     timerInterval = setInterval(startTimer, 1);
-    btnPlay.disabled = true;
-    btnPause.disabled = false;
-    btnPartial.disabled = false;
-    btnStop.disabled = false;
+    disableButtons("play");
   });
 
   btnPause.addEventListener("click", () => {
     clearInterval(timerInterval);
     elapsedTime = Date.now() - timeInit;
-    btnPlay.disabled = false;
-    btnPause.disabled = true;
-    btnPartial.disabled = true;
+    disableButtons("pause", "partial");
   });
 
   btnPartial.addEventListener("click", () => {
@@ -99,10 +101,7 @@ export default function cronometer() {
     clearInterval(timerInterval);
     elapsedTime = 0;
     partialCount = 0;
-    btnPlay.disabled = false;
-    btnPause.disabled = true;
-    btnPartial.disabled = true;
-    btnStop.disabled = true;
+    disableButtons("pause", "partial", "stop");
     displayMiliseconds.textContent = "000";
     displaySeconds.textContent = "00";
     displayMinutes.textContent = "00";
