@@ -3,8 +3,6 @@
   font-size: 2.5em;
   text-align: center;
   padding: 0.25em;
-  border: 0.05em solid #7c7a7a;
-  border-radius: 0.5em;
   display: flex;
   justify-content: space-evenly;
   gap: 0.1em;
