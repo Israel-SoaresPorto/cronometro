@@ -5,17 +5,17 @@ const mainContainer = document.querySelector('.container');
 const cronometerButton = document.querySelector('#cronometer');
 const timerButton = document.querySelector('#timer');
 
-const cronometerPage = new Cronometer();
-const timerPage = new Timer();
+const cronometerPage = new Cronometer().render();
+const timerPage = new Timer().render();
 
 cronometerButton.addEventListener('click', () => {
     mainContainer.innerHTML = '';
-    mainContainer.appendChild(cronometerPage.render());
+    mainContainer.appendChild(cronometerPage);
 });
 
 timerButton.addEventListener('click', () => {
     mainContainer.innerHTML = '';
-    mainContainer.appendChild(timerPage.render());
+    mainContainer.appendChild(timerPage);
 });
 
-mainContainer.appendChild(timerPage.render());
+mainContainer.appendChild(cronometerPage);
