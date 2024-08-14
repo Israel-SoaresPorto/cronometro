@@ -63,3 +63,10 @@
     gap: 1em;
 }
 
+@media screen and (min-width: 48em) {
+    .timer__controls {
+        gap: 2em;
+    }
+    
+}
+
