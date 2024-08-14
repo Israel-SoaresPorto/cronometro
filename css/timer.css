@@ -21,7 +21,7 @@
 }
 
 .timer__form label {
-    font-size: 1.25em;
+    font-size: 1em;
     font-family: "Ds-Digital", sans-serif;
     text-align: center;
     margin-left: 0.25em;
@@ -35,7 +35,7 @@
 .timer__form input {
     background-color: #e9e4e4;
     width: 2.5em;
-    font-size: 1.5em;
+    font-size: 1.25em;
     text-align: center;
     padding: 0.25em;
     border: none;
@@ -64,9 +64,30 @@
 }
 
 @media screen and (min-width: 48em) {
+    .timer__form input {
+        font-size: 1.5em;
+    }
+
     .timer__controls {
+        gap: 1.5em;
+    }
+}
+
+@media screen and (min-width: 90em) and (max-width: 160em) {
+    .timer {
         gap: 2em;
     }
-    
+
+    .timer__form {
+        gap: 2em;
+    }
+
+    .timer__form label, .timer__form input {
+        font-size: 2em;
+    }
+
+    .timer__form button {
+        font-size: 1.5em;
+    }
 }
 
