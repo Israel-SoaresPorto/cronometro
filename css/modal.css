@@ -1,0 +1,63 @@
+.modal {
+    font-size: 1rem;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.modal__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal__header__close {
+    background-color: transparent;
+    font-size: 1.5em;
+    border: none;
+    outline: none;
+    cursor: pointer;
+
+}
+
+.modal__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.modal__form-inputs {
+    display: flex;
+    gap: 1em;
+}
+
+.modal__form-inputs__group {
+    width: 5em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.modal__form-inputs__group label {
+    font-size: 0.8em;
+}
+
+.modal__form-inputs__group input {
+    width: 4em;
+    text-align: center;
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    outline: none;
+    border-radius: 0.5em;
+}
+
+.modal__form-inputs_group input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+
+
