@@ -11,17 +11,33 @@ export default class Timer {
     timerPage.classList.add("timer");
 
     timerPage.innerHTML = `
-            <form class="timer__form">
-                <div class="timer__form__inputs">
-                    <input type="number" id="hours-input" min="0" max="99">
-                    <label for="hours-input">h</label>
-                    <input type="number" id="minutes-input" min="0" max="59" >
-                    <label for="minutes-input">m</label>
-                    <input type="number" id="seconds-input" min="0" max="59">
-                    <label for="seconds-input">s</label>
+            <dialog class="timer__modal">
+                <div class="modal__header">
+                    <h2>Iniciar o Timer</h2>
+                    <button class="modal__header__close">&times</button>
                 </div>
-                <button type="submit">Iniciar</button>
-            </form>    
+                <form class="modal__form" formmethod="dialog">
+                    <div class="modal__form-inputs">
+                        <div class="modal__form-inputs__group">
+                            <label for="hours">Horas</label>
+                            <input type="number" id="hours" name="hours" min="0" max="23" step="1">
+                        </div>
+                        <div class="modal__form-inputs__group">
+                            <label for="minutes">Minutos</label>
+                            <input type="number" id="minutes" name="minutes" min="0" max="59" step="1">
+                        </div>
+                        <div class="modal__form-inputs__group">
+                            <label for="seconds">Segundos</label>
+                            <input type="number" id="seconds" name="seconds" min="0" max="59" step="1">
+                        </div>
+                    </div>
+                    <div class="modal__form-actions">
+                        <button type="submit" class="modal__form-actions__button">Iniciar</button>
+                        <button type="reset" class="modal__form-actions__button">Cancelar</button>
+                    </div>    
+                </form>
+            </dialog>
+            <button class="timer__open-modal">Iniciar o Timer</button>
             <div class="display">
                 <span id="hours">00</span>
                 <span class="colon">:</span>
@@ -36,31 +52,40 @@ export default class Timer {
             </div>
         `;
 
-    const form = timerPage.querySelector(".timer__form");
+    const modal = timerPage.querySelector(".timer__modal");
+    const timerForm = timerPage.querySelector(".modal__form");
+    const setTimerButton = timerPage.querySelector(".timer__open-modal");
     const display = timerPage.querySelector(".display");
     const playButton = timerPage.querySelector("#play");
     const pauseButton = timerPage.querySelector("#pause");
     const stopButton = timerPage.querySelector("#stop");
 
-    form.addEventListener("submit", (event) => {
+    modal.querySelector(".modal__header__close").addEventListener("click", () => {
+      modal.close();
+    });
+
+    timerForm.addEventListener("submit", (event) => {
       event.preventDefault();
 
-      const hours = parseInt(form.querySelector("#hours-input").value) || 0;
-      const minutes = parseInt(form.querySelector("#minutes-input").value) || 0;
-      const seconds = parseInt(form.querySelector("#seconds-input").value) || 0;
+      const hours = parseInt(timerForm.hours.value) || 0;
+      const minutes = parseInt(timerForm.minutes.value) || 0; 
+      const seconds = parseInt(timerForm.seconds.value) || 0;
 
-      this.duration = (hours * 60 * 60) + (minutes * 60) + seconds;
+      this.duration = hours * 3600 + minutes * 60 + seconds;
 
       if (this.duration <= 0) {
         return;
-      }
+      }    
 
-      form.reset();
       this.timerInterval = setInterval(() => this.displayTime(display), 1000);
-      this.displayTime(display);
 
-      form.querySelector("button").disabled = true;
+      modal.close();
+      setTimerButton.disabled = true;
       this.enableButtons(pauseButton, stopButton);
+    });
+
+    setTimerButton.addEventListener("click", () => {
+      modal.showModal();
     });
 
     playButton.addEventListener("click", () => {
@@ -79,7 +104,7 @@ export default class Timer {
       clearInterval(this.timerInterval);
       this.duration = 0;
       this.displayTime(display);
-      form.querySelector("button").disabled = false;
+      setTimerButton.disabled = false;
       this.disableButtons(playButton, pauseButton, stopButton);
     });
 
@@ -110,7 +135,7 @@ export default class Timer {
     
     if (remaningTime <= 0) {
       clearInterval(this.timerInterval);
-      display.previousElementSibling.querySelector("button").disabled = false;
+      display.previousElementSibling.disabled = false;
       this.disableButtons(...display.nextElementSibling.querySelectorAll("button"));
     }
 

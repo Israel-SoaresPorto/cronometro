@@ -1,15 +1,22 @@
-.modal {
+.timer__modal {
     font-size: 1rem;
     padding: 1em;
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
+    background-color: #e9e4e4;
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.timer__modal::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .modal__header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 1em;
 }
 
 .modal__header__close {
@@ -29,6 +36,7 @@
 
 .modal__form-inputs {
     display: flex;
+    justify-content: space-between;
     gap: 1em;
 }
 
@@ -50,14 +58,27 @@
     padding: 0.5em;
     border: 1px solid #ccc;
     outline: none;
-    border-radius: 0.5em;
 }
 
-.modal__form-inputs_group input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+.modal__form-actions {
+   display: flex;
+   flex-direction: row-reverse;
+   justify-content: center;
+   gap: 1em;
 }
 
+.modal__form-actions button {
+    padding: 0.5em 1em;
+    color: white;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
 
+.modal__form-actions button[type="submit"] {
+    background-color: #007bff;
+}
 
-
+.modal__form-actions button[type="reset"] {
+    color: #000000;
+}

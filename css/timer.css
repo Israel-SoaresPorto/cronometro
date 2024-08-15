@@ -6,66 +6,16 @@
     gap: 1rem;
 }
 
-.timer__form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-}
-
-.timer__inputs {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.timer__form label {
-    font-size: 1rem;
-    font-family: "Ds-Digital", sans-serif;
-    margin-left: 0.1rem;
-    margin-right: 1em;
-}
-
-.timer__form label:last-child {
-    margin-right: 0;
-}
-
-.timer__form input {
-    background-color: #e9e4e4;
-    width: 2.5rem;
-    font-size: 0.4em;
-    text-align: center;
-    padding: 0.25em;
+.timer__open-modal {
+    background-color: #f8f9fa;
     border: none;
     outline: none;
-    border-radius: 0.5em;
-}
-
-.timer__form input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-.timer__form button {
-    background-color: #e9e4e4;
-    padding: 0.5em;
-    font-size: 1rem;
-    border: none;
-    outline: none;
+    padding: 0.5rem 1rem;
     cursor: pointer;
 }
 
 .timer__controls {
     display: flex;
     gap: 1rem;
-}
-
-@media screen and (min-width: 48em) {
-    .timer__form input {
-        width: 2em;
-        font-size: 0.3em;
-    }
-    
 }
 
