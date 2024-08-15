@@ -25,7 +25,7 @@ export default class Cronometer {
       <div class="controls">
         ${new Button("play", "play", false).render()}
         ${new Button("pause", "pause", true).render()}
-        ${new Button("partial", "timer", true).render()}
+        ${new Button("partial", "clock", true).render()}
         ${new Button("stop", "stop", true).render()}
       </div>
       <div id="partials-list"></div>

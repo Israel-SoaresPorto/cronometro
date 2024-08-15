@@ -15,7 +15,7 @@ export default class Button {
     this.button.id = id;
     this.button.classList.add("button__control");
     this.button.disabled = disabled;
-    this.button.innerHTML = `<img src="assets/icons/${icon}.svg" alt="" />`;
+    this.button.innerHTML = `<i class="fa-solid fa-${icon}"></i>`;
   }
 
  /*  eventClick(callback) {

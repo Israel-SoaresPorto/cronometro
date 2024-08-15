@@ -1,7 +1,37 @@
+#play {
+  background-color: #51d131; 
+}
+
+#play:hover {
+  background-color: #4aae2e;
+}
+
+#pause {
+  background-color: #f7b500;
+}
+
+#pause:hover {
+  background-color: #e6a200;
+}
+
+#stop {
+  background-color: #f44336;
+}
+
+#stop:hover {
+  background-color: #e63a2d;
+}
+
+#partial {
+  background-color: #00b1f7;
+}
+
+#partial:hover {
+  background-color: #0099d9;
+}
+
 .button__control {
-  background-color: #e9e4e4;
-  color: #5f6368;
-  padding: 0.25em;
+  padding: 0.75em;
   border: none;
   border-radius: 50%;
   outline: none;
@@ -12,32 +42,19 @@
   gap: 0.25em;
 }
 
-.button__control:hover {
-  background-color: #dcdcdc;
-}
-
-.button__control img {
-  width: 2em;
-}
-
-@media screen and (min-width: 27em) {
-  .button__control img {
-    width: 2.5em;
-  }
+.fa-solid {
+  font-size: 1.5em;
+  width: 1em;
 }
 
 @media screen and (min-width: 48em) {
-  .button__control {
-    padding: 0.5em;
-  }
-
-  .button__control img {
-    width: 3em;
+  .fa-solid {
+    font-size: 2em;
   }
 }
 
 @media screen and (min-width: 90em) and (max-width: 160em) {
-  .button__control img {
-    width: max(3em, 3vw);
+  .fa-solid {
+    font-size: 3em;
   }
 }
