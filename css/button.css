@@ -46,15 +46,3 @@
   font-size: 1.5em;
   width: 1em;
 }
-
-@media screen and (min-width: 48em) {
-  .fa-solid {
-    font-size: 2em;
-  }
-}
-
-@media screen and (min-width: 90em) and (max-width: 160em) {
-  .fa-solid {
-    font-size: 3em;
-  }
-}
