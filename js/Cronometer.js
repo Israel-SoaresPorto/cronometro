@@ -4,6 +4,7 @@ export default class Cronometer {
   constructor() {
     this.timeInit;
     this.elapsedTime = 0;
+    this.elapsedPartialTime = 0;
     this.timerInterval;
     this.partialCount = 0;
   }
@@ -52,7 +53,7 @@ export default class Cronometer {
     });
 
     btnPartial.addEventListener("click", () => {
-      this.recordPartial(partialsList, display);
+      this.recordPartial(partialsList);
     });
 
     btnStop.addEventListener("click", () => {
@@ -69,33 +70,6 @@ export default class Cronometer {
     return cronometerPage;
   }
 
-  startCronometer(display) {
-    let timeNow = Date.now();
-    let timeDiff = timeNow - this.timeInit;
-    this.updateTime(timeDiff, display);
-  }
-
-  updateTime(time, display) {
-    let hours = Math.floor(time / 3600000);
-    let rest = time % 3600000;
-    let minutes = Math.floor(rest / 60000);
-    let seconds = Math.floor((rest % 60000) / 1000);
-    let milliseconds = rest % 1000;
-
-    display.querySelector("#miliseconds").textContent =
-      milliseconds < 10
-        ? "00" + milliseconds
-        : milliseconds < 100
-        ? "0" + milliseconds
-        : milliseconds;
-    display.querySelector("#seconds").textContent =
-      seconds < 10 ? "0" + seconds : seconds;
-    display.querySelector("#minutes").textContent =
-      minutes < 10 ? "0" + minutes : minutes;
-    display.querySelector("#hours").textContent =
-      hours < 10 ? "0" + hours : hours;
-  }
-
   disableButtons(...buttons) {
     buttons.forEach((button) => (button.disabled = true));
   }
@@ -104,26 +78,70 @@ export default class Cronometer {
     buttons.forEach((button) => (button.disabled = false));
   }
 
+  convertTime(time) {
+    let hours = Math.floor(time / 3600000);
+    let rest = time % 3600000;
+    let minutes = Math.floor(rest / 60000);
+    let seconds = Math.floor((rest % 60000) / 1000);
+    let milliseconds = rest % 1000;
+
+    hours = hours < 10 ? "0" + hours : hours;
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+    milliseconds =
+      milliseconds < 10
+        ? "00" + milliseconds
+        : milliseconds < 100
+        ? "0" + milliseconds
+        : milliseconds;
+
+    return [hours, minutes, seconds, milliseconds];
+  }
+
+  startCronometer(display) {
+    let timeNow = Date.now();
+    let timeDiff = timeNow - this.timeInit;
+    this.updateTime(timeDiff, display);
+  }
+
+  updateTime(time, display) {
+    let [hours, minutes, seconds, milliseconds] = this.convertTime(time);
+
+    display.querySelector("#miliseconds").textContent = milliseconds;
+    display.querySelector("#seconds").textContent = seconds;
+    display.querySelector("#minutes").textContent = minutes;
+    display.querySelector("#hours").textContent = hours;
+  }
+
   pauseCronometer() {
     clearInterval(this.timerInterval);
     this.elapsedTime = Date.now() - this.timeInit;
   }
 
-  recordPartial(partials, display) {
-    let partialHours = display.querySelector("#hours").textContent;
-    let partialMinutes = display.querySelector("#minutes").textContent;
-    let partialSeconds = display.querySelector("#seconds").textContent;
-    let partialMilliseconds = display.querySelector("#miliseconds").textContent;
+  recordPartial(partials) {
+    let partialTime = Date.now() - this.timeInit;
 
-    let partialTimeDisplay = `${partialHours} : ${partialMinutes} : ${partialSeconds} : ${partialMilliseconds}`;
+    let elapsedPartialTime = partialTime - this.elapsedPartialTime;
+
+    let partialTimeArray = this.convertTime(elapsedPartialTime);
+    let elapsedPartialTimeArray = this.convertTime(partialTime);
+
+    let partialTimeDisplay = `${partialTimeArray[0]} : ${partialTimeArray[1]} : ${partialTimeArray[2]} : ${partialTimeArray[3]}`;
+
+    let elapsedPartialTimeDisplay = `${elapsedPartialTimeArray[0]} : ${elapsedPartialTimeArray[1]} : ${elapsedPartialTimeArray[2]} : ${elapsedPartialTimeArray[3]}`;
 
     this.partialCount++;
+    this.elapsedPartialTime = partialTime;
 
     let partialTimeElement = document.createElement("div");
 
     partialTimeElement.classList.add("partial");
 
-    partialTimeElement.innerHTML = `<span>${this.partialCount}</span><span>${partialTimeDisplay}</span>`;
+    partialTimeElement.innerHTML = `
+        <span>${this.partialCount}</span>
+        <span>${partialTimeDisplay}</span>
+        <span>${elapsedPartialTimeDisplay}</span>
+    `;
 
     partials.appendChild(partialTimeElement);
   }
@@ -132,5 +150,6 @@ export default class Cronometer {
     clearInterval(this.timerInterval);
     this.elapsedTime = 0;
     this.partialCount = 0;
+    this.elapsedPartialTime = 0;
   }
 }

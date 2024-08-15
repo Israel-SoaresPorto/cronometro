@@ -28,7 +28,7 @@
 }
 
 .partial {
-  width: 10em;
+  width: 20em;
   background-color: #e9e4e4;
   font-family: "Ds-Digital", sans-serif;
   text-align: center;
@@ -45,6 +45,14 @@
   background-color: #000000;
   color: #ffffff;
   width: 1.5em;
+  padding: 0.25em;
+  font-weight: bold;
+}
+
+.partial span:last-child {
+  width: 8em;
+  background-color: #000000;
+  color: #ffffff;
   padding: 0.25em;
   font-weight: bold;
 }
