@@ -79,9 +79,14 @@ export default class Timer {
 
       this.timerInterval = setInterval(() => this.displayTime(display), 1000);
 
+      timerForm.reset();
       modal.close();
       setTimerButton.disabled = true;
       this.enableButtons(pauseButton, stopButton);
+    });
+
+    timerForm.addEventListener("reset", () => {
+      modal.close();
     });
 
     setTimerButton.addEventListener("click", () => {
