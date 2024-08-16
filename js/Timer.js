@@ -60,22 +60,24 @@ export default class Timer {
     const pauseButton = timerPage.querySelector("#pause");
     const stopButton = timerPage.querySelector("#stop");
 
-    modal.querySelector(".modal__header__close").addEventListener("click", () => {
-      modal.close();
-    });
+    modal
+      .querySelector(".modal__header__close")
+      .addEventListener("click", () => {
+        modal.close();
+      });
 
     timerForm.addEventListener("submit", (event) => {
       event.preventDefault();
 
       const hours = parseInt(timerForm.hours.value) || 0;
-      const minutes = parseInt(timerForm.minutes.value) || 0; 
+      const minutes = parseInt(timerForm.minutes.value) || 0;
       const seconds = parseInt(timerForm.seconds.value) || 0;
 
       this.duration = hours * 3600 + minutes * 60 + seconds;
 
       if (this.duration <= 0) {
         return;
-      }    
+      }
 
       this.timerInterval = setInterval(() => this.displayTime(display), 1000);
 
@@ -111,6 +113,7 @@ export default class Timer {
       this.displayTime(display);
       setTimerButton.disabled = false;
       this.disableButtons(playButton, pauseButton, stopButton);
+      document.title = "Timer";
     });
 
     return timerPage;
@@ -122,6 +125,10 @@ export default class Timer {
 
   enableButtons(...buttons) {
     buttons.forEach((button) => (button.disabled = false));
+  }
+
+  static showTitle() {
+    document.title = this.title;
   }
 
   displayTime(display) {
@@ -137,11 +144,18 @@ export default class Timer {
       minutes < 10 ? `0${minutes}` : minutes;
     display.querySelector("#seconds").textContent =
       seconds < 10 ? `0${seconds}` : seconds;
-    
+
+    document.title = `${hours < 10 ? `0${hours}` : hours}:${
+      minutes < 10 ? `0${minutes}` : minutes
+    }:${seconds < 10 ? `0${seconds}` : seconds} | Timer`;
+
     if (remaningTime <= 0) {
       clearInterval(this.timerInterval);
       display.previousElementSibling.disabled = false;
-      this.disableButtons(...display.nextElementSibling.querySelectorAll("button"));
+      this.disableButtons(
+        ...display.nextElementSibling.querySelectorAll("button")
+      );
+      document.title = "Timer";
     }
 
     this.duration--;

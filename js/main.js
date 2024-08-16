@@ -9,13 +9,13 @@ const cronometerPage = new Cronometer().render();
 const timerPage = new Timer().render();
 
 cronometerButton.addEventListener('click', () => {
-    document.title = 'Cronômetro';
+    document.title = "Cronômetro";
     mainContainer.innerHTML = '';
     mainContainer.appendChild(cronometerPage);
 });
 
 timerButton.addEventListener('click', () => {
-    document.title = 'Timer';
+    document.title = "Timer";
     mainContainer.innerHTML = '';
     mainContainer.appendChild(timerPage);
 });

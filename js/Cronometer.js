@@ -111,6 +111,8 @@ export default class Cronometer {
     display.querySelector("#seconds").textContent = seconds;
     display.querySelector("#minutes").textContent = minutes;
     display.querySelector("#hours").textContent = hours;
+
+    document.title = `${hours}:${minutes}:${seconds} | Cronômetro`;
   }
 
   pauseCronometer() {
@@ -151,5 +153,6 @@ export default class Cronometer {
     this.elapsedTime = 0;
     this.partialCount = 0;
     this.elapsedPartialTime = 0;
+    document.title = "Cronômetro";
   }
 }
