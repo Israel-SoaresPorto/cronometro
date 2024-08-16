@@ -1,6 +1,8 @@
 import Button from "./Button.js";
 
 export default class Timer {
+  static onScreen = true;
+
   constructor() {
     this.timerInterval;
     this.duration = 0;
@@ -145,9 +147,11 @@ export default class Timer {
     display.querySelector("#seconds").textContent =
       seconds < 10 ? `0${seconds}` : seconds;
 
-    document.title = `${hours < 10 ? `0${hours}` : hours}:${
-      minutes < 10 ? `0${minutes}` : minutes
-    }:${seconds < 10 ? `0${seconds}` : seconds} | Timer`;
+    if (Timer.onScreen) {
+      document.title = `${hours < 10 ? `0${hours}` : hours}:${
+        minutes < 10 ? `0${minutes}` : minutes
+      }:${seconds < 10 ? `0${seconds}` : seconds} | Timer`;
+    }
 
     if (remaningTime <= 0) {
       clearInterval(this.timerInterval);

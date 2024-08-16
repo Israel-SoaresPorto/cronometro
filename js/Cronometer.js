@@ -1,6 +1,8 @@
 import Button from "./Button.js";
 
 export default class Cronometer {
+  static onScreen = true;
+
   constructor() {
     this.timeInit;
     this.elapsedTime = 0;
@@ -112,7 +114,9 @@ export default class Cronometer {
     display.querySelector("#minutes").textContent = minutes;
     display.querySelector("#hours").textContent = hours;
 
-    document.title = `${hours}:${minutes}:${seconds} | Cronômetro`;
+    if(Cronometer.onScreen) {
+      document.title = `${hours}:${minutes}:${seconds} | Cronômetro`;
+    }
   }
 
   pauseCronometer() {
