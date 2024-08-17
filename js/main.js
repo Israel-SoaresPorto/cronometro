@@ -4,6 +4,7 @@ import Timer from "./Timer.js";
 const mainContainer = document.querySelector('.container');
 const cronometerButton = document.querySelector('#cronometer');
 const timerButton = document.querySelector('#timer');
+const changeThemeButton = document.querySelector('#change-theme');
 
 const cronometerPage = new Cronometer().render();
 const timerPage = new Timer().render();
@@ -25,3 +26,9 @@ timerButton.addEventListener('click', () => {
 });
 
 mainContainer.appendChild(cronometerPage);
+
+changeThemeButton.addEventListener('click', () => {
+    document.body.classList.toggle('light');
+    document.querySelector('.fa-solid').classList.toggle('.light');
+});
+

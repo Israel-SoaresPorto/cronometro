@@ -8,11 +8,21 @@
 
 .timer__open-modal {
     font-size: 1rem;
-    background-color: #f8f9fa;
+    background-color: var(--light-background-color);
+    color: var(--light-font-color);
     border: none;
     outline: none;
     padding: 0.5rem 1rem;
     cursor: pointer;
+}
+
+.timer__open-modal:disabled {
+    display: none;
+}
+
+body.light .timer__open-modal {
+    background-color: var(--dark-background-color);
+    color: var(--dark-font-color);
 }
 
 .timer__controls {
