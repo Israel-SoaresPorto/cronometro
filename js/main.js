@@ -29,6 +29,5 @@ mainContainer.appendChild(cronometerPage);
 
 changeThemeButton.addEventListener('click', () => {
     document.body.classList.toggle('light');
-    document.querySelector('.fa-solid').classList.toggle('.light');
 });
 

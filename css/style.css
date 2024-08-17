@@ -9,10 +9,12 @@
 }
 
 :root {
-  --light-background-color: #ffffff;
-  --light-font-color: #000000;
   --dark-background-color: #000000;
   --dark-font-color: #ffffff;
+  --dark-primary-color: #e9e4e4;
+  --light-background-color: #ffffff;
+  --light-font-color: #000000;
+  --light-primary-color: #353232;
 }
 
 * {
