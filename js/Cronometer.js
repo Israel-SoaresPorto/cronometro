@@ -149,7 +149,7 @@ export default class Cronometer {
         <span>${elapsedPartialTimeDisplay}</span>
     `;
 
-    partials.appendChild(partialTimeElement);
+    partials.insertBefore(partialTimeElement, partials.firstChild);
   }
 
   stopCronometer() {
