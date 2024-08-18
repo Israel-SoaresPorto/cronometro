@@ -16,12 +16,12 @@ let isPaused = sessionStorage.getItem("cronometerIsPaused") === "true";
 let partialCount = 0;
 let partials = JSON.parse(sessionStorage.getItem("cronometerPartials")) || [];
 
-function saveState() {
+function saveCronometerState() {
   sessionStorage.setItem("cronometerTimeInit", timeInit);
   sessionStorage.setItem("cronometerElapsedTime", elapsedTime);
 }
 
-function loadState() {
+function loadCronometerState() {
   const savedTimeInit = sessionStorage.getItem("cronometerTimeInit") || 0;
   const savedElapsedTime = sessionStorage.getItem("cronometerElapsedTime") || 0;
 
@@ -29,7 +29,7 @@ function loadState() {
   elapsedTime = parseInt(savedElapsedTime);
 }
 
-function setPauseState(pauseState) {
+function setCronometerPauseState(pauseState) {
   isPaused = pauseState;
   sessionStorage.setItem("cronometerIsPaused", isPaused);
 }
@@ -39,7 +39,7 @@ function setPartialState(partials) {
   sessionStorage.setItem("cronometerElapsedPartialTime", elapsedPartialTime);
 }
 
-function convertTime(time) {
+function formatCronometerTime(time) {
   let hours = Math.floor(time / 3600000);
   let rest = time % 3600000;
   let minutes = Math.floor(rest / 60000);
@@ -62,11 +62,11 @@ function convertTime(time) {
 function startCronometer(display) {
   let timeNow = Date.now();
   let timeDiff = timeNow - timeInit;
-  updateTime(timeDiff, display);
+  updateCronometerDisplay(timeDiff, display);
 }
 
-function updateTime(time) {
-  let [hours, minutes, seconds, milliseconds] = convertTime(time);
+function updateCronometerDisplay(time) {
+  let [hours, minutes, seconds, milliseconds] = formatCronometerTime(time);
 
   display.querySelector("#miliseconds").textContent = milliseconds;
   display.querySelector("#seconds").textContent = seconds;
@@ -101,8 +101,8 @@ function recordPartial() {
 }
 
 function showPartial(partial) {
-  let partialTimeArray = convertTime(partial.totalTime);
-  let elapsedPartialTimeArray = convertTime(partial.elapsedTime);
+  let partialTimeArray = formatCronometerTime(partial.totalTime);
+  let elapsedPartialTimeArray = formatCronometerTime(partial.elapsedTime);
 
   let partialTimeDisplay = `${partialTimeArray[0]} : ${partialTimeArray[1]} : ${partialTimeArray[2]} : ${partialTimeArray[3]}`;
 
@@ -134,11 +134,11 @@ function stopCronometer() {
 }
 
 window.addEventListener("load", () => {
-  loadState();
+  loadCronometerState();
 
   if (timeInit) {
     if (isPaused) {
-      updateTime(elapsedTime);
+      updateCronometerDisplay(elapsedTime);
       disableButtons(btnPause, btnPartial);
       enableButtons(btnPlay, btnStop);
     } else {
@@ -156,16 +156,16 @@ btnPlay.addEventListener("click", () => {
   timerInterval = setInterval(() => startCronometer(display), 1);
   disableButtons(btnPlay);
   enableButtons(btnPause, btnPartial, btnStop);
-  setPauseState(false);
-  saveState();
+  setCronometerPauseState(false);
+  saveCronometerState();
 });
 
 btnPause.addEventListener("click", () => {
   pauseCronometer();
   disableButtons(btnPause, btnPartial);
   enableButtons(btnPlay);
-  saveState();
-  setPauseState(true);
+  saveCronometerState();
+  setCronometerPauseState(true);
 });
 
 btnPartial.addEventListener("click", () => {
@@ -184,6 +184,6 @@ btnStop.addEventListener("click", () => {
   display.querySelector("#hours").textContent = "00";
   partialsList.innerHTML = "";
   setPartialState([]);
-  setPauseState(false);
-  saveState();
+  setCronometerPauseState(false);
+  saveCronometerState();
 });
