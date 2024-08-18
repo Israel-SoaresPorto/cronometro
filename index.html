@@ -13,7 +13,7 @@
       src="https://kit.fontawesome.com/05815059d6.js"
       crossorigin="anonymous"
     ></script>
-    <title></title>
+    <title>Cronômetro</title>
   </head>
   <body>
     <header class="header">
@@ -21,10 +21,38 @@
         <button id="cronometer">Cronômetro</button>
         <button id="timer">Timer</button>
       </nav>
-      <button id="change-theme"><i class="fa-solid fa-circle-half-stroke"></i></button>
+      <button id="change-theme">
+        <i class="fa-solid fa-circle-half-stroke"></i>
+      </button>
     </header>
-    <main class="container"></main>
+    <main class="container">
+      <div class="display">
+        <span id="hours">00</span>
+        <span class="colon">:</span>
+        <span id="minutes">00</span>
+        <span class="colon">:</span>
+        <span id="seconds">00</span>
+        <span class="colon">:</span>
+        <span id="miliseconds">000</span>
+      </div>
+      <div class="controls">
+        <button class="button__control" id="play">
+          <i class="fa-solid fa-play"></i>
+        </button>
+        <button class="button__control" id="pause" disabled>
+          <i class="fa-solid fa-pause"></i>
+        </button>
+        <button class="button__control" id="partial" disabled>
+          <i class="fa-solid fa-clock"></i>
+        </button>
+        <button class="button__control" id="stop" disabled>
+          <i class="fa-solid fa-stop"></i>
+        </button>
+      </div>
+      <div id="partials-list"></div>
+    </main>
 
-    <script type="module" src="js/main.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/cronometer.js"></script>
   </body>
 </html>
