@@ -88,6 +88,16 @@ body.light #change-theme {
   justify-content: center;
 }
 
+@media screen and (min-width: 27em) {
+  .header {
+    font-size: 1.25em;
+  }
+
+  .container {
+    font-size: 3.5em;
+  }
+}
+
 @media screen and (min-width: 48em) {
   .container {
     font-size: 4.5em;
