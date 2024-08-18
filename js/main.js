@@ -8,6 +8,16 @@ const changeThemeButton = document.querySelector('#change-theme');
 
 const cronometerPage = new Cronometer().render();
 const timerPage = new Timer().render();
+let actualTheme = localStorage.getItem('theme');
+
+window.addEventListener('load', () => {
+    mainContainer.appendChild(cronometerPage);
+    document.title = "Cronômetro";
+
+    if (actualTheme === 'light') {
+        document.body.classList.add('light');
+    }
+});
 
 cronometerButton.addEventListener('click', () => {
     Cronometer.onScreen = true;
@@ -25,9 +35,13 @@ timerButton.addEventListener('click', () => {
     mainContainer.appendChild(timerPage);
 });
 
-mainContainer.appendChild(cronometerPage);
-
 changeThemeButton.addEventListener('click', () => {
     document.body.classList.toggle('light');
+
+    if(document.body.classList.contains('light')) {
+        localStorage.setItem('theme', 'light');
+    } else {
+        localStorage.setItem('theme', 'dark');
+    }
 });
 
