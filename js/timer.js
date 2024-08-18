@@ -1,4 +1,4 @@
-import { disableButtons, enableButtons } from "./buttonsControl.js";
+import { disableButtons, enableButtons } from "./utils.js";
 
 const modal = document.querySelector(".timer__modal");
 const timerForm = document.querySelector(".modal__form");

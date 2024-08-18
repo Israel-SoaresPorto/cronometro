@@ -1,4 +1,4 @@
-import { disableButtons, enableButtons } from "./buttonsControl.js";
+import { disableButtons, enableButtons } from "./utils.js";
 
 const display = document.querySelector(".display");
 const btnPlay = document.querySelector("#play");
