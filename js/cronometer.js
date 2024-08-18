@@ -7,10 +7,12 @@ const partialsList = document.querySelector("#partials-list");
 
 let timeInit;
 let elapsedTime = 0;
-let elapsedPartialTime = 0;
+let elapsedPartialTime =
+  sessionStorage.getItem("cronometerElapsedPartialTime") || 0;
 let timerInterval;
-let partialCount = 0;
 let isPaused = sessionStorage.getItem("cronometerIsPaused") === "true";
+let partialCount = 0;
+let partials = JSON.parse(sessionStorage.getItem("cronometerPartials")) || [];
 
 function saveState() {
   sessionStorage.setItem("cronometerTimeInit", timeInit);
@@ -28,6 +30,11 @@ function loadState() {
 function setPauseState(pauseState) {
   isPaused = pauseState;
   sessionStorage.setItem("cronometerIsPaused", isPaused);
+}
+
+function setPartialState(partials) {
+  sessionStorage.setItem("cronometerPartials", JSON.stringify(partials));
+  sessionStorage.setItem("cronometerElapsedPartialTime", elapsedPartialTime);
 }
 
 function disableButtons(...buttons) {
@@ -80,13 +87,28 @@ function pauseCronometer() {
   elapsedTime = Date.now() - timeInit;
 }
 
+function restorePartials(partials) {
+  partials.map((partial) => {
+    showPartial(partial);
+  });
+}
+
 function recordPartial() {
   let partialTime = Date.now() - timeInit;
 
   let elapsedPartial = partialTime - elapsedPartialTime;
 
-  let partialTimeArray = convertTime(elapsedPartial);
-  let elapsedPartialTimeArray = convertTime(partialTime);
+  partials.push({
+    totalTime: partialTime,
+    elapsedTime: elapsedPartial,
+  });
+
+  elapsedPartialTime = partialTime;
+}
+
+function showPartial(partial) {
+  let partialTimeArray = convertTime(partial.totalTime);
+  let elapsedPartialTimeArray = convertTime(partial.elapsedTime);
 
   let partialTimeDisplay = `${partialTimeArray[0]} : ${partialTimeArray[1]} : ${partialTimeArray[2]} : ${partialTimeArray[3]}`;
 
@@ -94,17 +116,15 @@ function recordPartial() {
 
   partialCount++;
 
-  elapsedPartialTime = partialTime;
-
   let partialTimeElement = document.createElement("div");
 
   partialTimeElement.classList.add("partial");
 
   partialTimeElement.innerHTML = `
-          <span>${partialCount}</span>
-          <span>${partialTimeDisplay}</span>
-          <span>${elapsedPartialTimeDisplay}</span>
-      `;
+        <span>${partialCount}</span>
+        <span>${elapsedPartialTimeDisplay}</span>
+        <span>${partialTimeDisplay}</span>
+    `;
 
   partialsList.insertBefore(partialTimeElement, partialsList.firstChild);
 }
@@ -115,6 +135,7 @@ function stopCronometer() {
   elapsedTime = 0;
   partialCount = 0;
   elapsedPartialTime = 0;
+  partials = [];
   document.title = "Cronômetro";
 }
 
@@ -132,6 +153,8 @@ window.addEventListener("load", () => {
       timerInterval = setInterval(() => startCronometer(display), 1);
     }
   }
+
+  restorePartials(partials);
 });
 
 btnPlay.addEventListener("click", () => {
@@ -152,7 +175,9 @@ btnPause.addEventListener("click", () => {
 });
 
 btnPartial.addEventListener("click", () => {
-  recordPartial(partialsList);
+  recordPartial();
+  showPartial(partials[partials.length - 1]);
+  setPartialState(partials);
 });
 
 btnStop.addEventListener("click", () => {
@@ -164,6 +189,7 @@ btnStop.addEventListener("click", () => {
   display.querySelector("#minutes").textContent = "00";
   display.querySelector("#hours").textContent = "00";
   partialsList.innerHTML = "";
+  setPartialState([]);
   setPauseState(false);
   saveState();
 });
