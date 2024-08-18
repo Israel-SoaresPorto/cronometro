@@ -11,25 +11,28 @@ const stopButton = document.querySelector("#stop");
 let timerInterval;
 let duration = 0;
 
+function formatTimerTime(time) {
+  let hours = Math.floor(time / 3600);
+  let minutes = Math.floor((time / 60) % 60);
+  let seconds = Math.floor(time % 60);
+
+  hours = hours < 10 ? "0" + hours : hours;
+  minutes = minutes < 10 ? "0" + minutes : minutes;
+  seconds = seconds < 10 ? "0" + seconds : seconds;
+
+  return [hours, minutes, seconds];
+}
+
 function displayTime() {
-  let remaningTime = duration;
+  let [hours, minutes, seconds] = formatTimerTime(duration);
 
-  const hours = Math.floor(remaningTime / 3600);
-  const minutes = Math.floor((remaningTime / 60) % 60);
-  const seconds = Math.floor(remaningTime % 60);
+  display.querySelector("#hours").textContent = hours;
+  display.querySelector("#minutes").textContent = minutes;
+  display.querySelector("#seconds").textContent = seconds;
 
-  display.querySelector("#hours").textContent =
-    hours < 10 ? `0${hours}` : hours;
-  display.querySelector("#minutes").textContent =
-    minutes < 10 ? `0${minutes}` : minutes;
-  display.querySelector("#seconds").textContent =
-    seconds < 10 ? `0${seconds}` : seconds;
-
-  document.title = `${hours < 10 ? `0${hours}` : hours}:${
-    minutes < 10 ? `0${minutes}` : minutes
-  }:${seconds < 10 ? `0${seconds}` : seconds} | Timer`;
-
-  if (remaningTime <= 0) {
+  document.title = `${hours}:${minutes}:${seconds}`;
+  
+  if (duration <= 0) {
     clearInterval(timerInterval);
     setTimerButton.disabled = false;
     disableButtons(...document.querySelectorAll("button__control"));

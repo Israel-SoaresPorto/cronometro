@@ -59,10 +59,10 @@ function formatCronometerTime(time) {
   return [hours, minutes, seconds, milliseconds];
 }
 
-function startCronometer(display) {
+function startCronometer() {
   let timeNow = Date.now();
   let timeDiff = timeNow - timeInit;
-  updateCronometerDisplay(timeDiff, display);
+  updateCronometerDisplay(timeDiff);
 }
 
 function updateCronometerDisplay(time) {
@@ -144,7 +144,7 @@ window.addEventListener("load", () => {
     } else {
       disableButtons(btnPlay);
       enableButtons(btnPause, btnPartial, btnStop);
-      timerInterval = setInterval(() => startCronometer(display), 1);
+      timerInterval = setInterval(() => startCronometer(), 1);
     }
   }
 
@@ -153,7 +153,7 @@ window.addEventListener("load", () => {
 
 btnPlay.addEventListener("click", () => {
   timeInit = Date.now() - elapsedTime;
-  timerInterval = setInterval(() => startCronometer(display), 1);
+  timerInterval = setInterval(() => startCronometer(), 1);
   disableButtons(btnPlay);
   enableButtons(btnPause, btnPartial, btnStop);
   setCronometerPauseState(false);
