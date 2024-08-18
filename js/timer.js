@@ -1,3 +1,5 @@
+import { disableButtons, enableButtons } from "./buttonsControl.js";
+
 const modal = document.querySelector(".timer__modal");
 const timerForm = document.querySelector(".modal__form");
 const setTimerButton = document.querySelector(".timer__open-modal");
@@ -8,14 +10,6 @@ const stopButton = document.querySelector("#stop");
 
 let timerInterval;
 let duration = 0;
-
-function disableButtons(...buttons) {
-  buttons.forEach((button) => (button.disabled = true));
-}
-
-function enableButtons(...buttons) {
-  buttons.forEach((button) => (button.disabled = false));
-}
 
 function displayTime() {
   let remaningTime = duration;
@@ -38,7 +32,7 @@ function displayTime() {
   if (remaningTime <= 0) {
     clearInterval(timerInterval);
     setTimerButton.disabled = false;
-    this.disableButtons(...document.querySelectorAll("button__control"));
+    disableButtons(...document.querySelectorAll("button__control"));
     document.title = "Timer";
   }
 
@@ -58,7 +52,7 @@ timerForm.addEventListener("submit", (event) => {
 
   duration = hours * 3600 + minutes * 60 + seconds;
 
-  if (this.duration <= 0) {
+  if (duration <= 0) {
     return;
   }
 
@@ -79,7 +73,7 @@ setTimerButton.addEventListener("click", () => {
 });
 
 playButton.addEventListener("click", () => {
-  timerInterval = setInterval(() => displayTime(display), 1000);
+  timerInterval = setInterval(() => displayTime(), 1000);
   disableButtons(playButton);
   enableButtons(pauseButton);
 });

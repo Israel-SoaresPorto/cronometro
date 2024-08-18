@@ -1,3 +1,5 @@
+import { disableButtons, enableButtons } from "./buttonsControl.js";
+
 const display = document.querySelector(".display");
 const btnPlay = document.querySelector("#play");
 const btnPause = document.querySelector("#pause");
@@ -35,14 +37,6 @@ function setPauseState(pauseState) {
 function setPartialState(partials) {
   sessionStorage.setItem("cronometerPartials", JSON.stringify(partials));
   sessionStorage.setItem("cronometerElapsedPartialTime", elapsedPartialTime);
-}
-
-function disableButtons(...buttons) {
-  buttons.forEach((button) => (button.disabled = true));
-}
-
-function enableButtons(...buttons) {
-  buttons.forEach((button) => (button.disabled = false));
 }
 
 function convertTime(time) {
