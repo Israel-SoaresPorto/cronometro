@@ -8,8 +8,14 @@ const playButton = document.querySelector("#play");
 const pauseButton = document.querySelector("#pause");
 const stopButton = document.querySelector("#stop");
 
+let timeInit = 0;
+let elapsedTime = 0;
 let timerInterval;
-let duration = 0;
+let timeEnd = parseInt(sessionStorage.getItem("timerEnd")) || 0;
+
+function saveTimerState() {
+  sessionStorage.setItem("timerEnd", timeEnd);
+}
 
 function formatTimerTime(time) {
   let hours = Math.floor(time / 3600);
@@ -23,24 +29,46 @@ function formatTimerTime(time) {
   return [hours, minutes, seconds];
 }
 
-function displayTime() {
-  let [hours, minutes, seconds] = formatTimerTime(duration);
+function startTimer() {
+  timeInit = Date.now() - elapsedTime;
+
+  let remaningTime = timeEnd - timeInit;
+
+  displayTime(remaningTime / 1000);
+
+  if (remaningTime <= 0) {
+    clearInterval(timerInterval);
+    setTimerButton.disabled = false;
+    disableButtons(playButton, pauseButton, stopButton);
+    document.title = "Timer";
+    return;
+  }
+}
+
+function displayTime(time) {
+  let [hours, minutes, seconds] = formatTimerTime(time);
 
   display.querySelector("#hours").textContent = hours;
   display.querySelector("#minutes").textContent = minutes;
   display.querySelector("#seconds").textContent = seconds;
-
-  document.title = `${hours}:${minutes}:${seconds}`;
   
-  if (duration <= 0) {
-    clearInterval(timerInterval);
-    setTimerButton.disabled = false;
-    disableButtons(...document.querySelectorAll("button__control"));
-    document.title = "Timer";
-  }
+  document.title = `${hours}:${minutes}:${seconds} | Timer`;
 
-  duration--;
 }
+
+window.addEventListener("beforeunload", saveTimerState);
+
+window.addEventListener("load", () => {
+  if (timeEnd > 0) {
+    timerInterval = setInterval(() => startTimer(), 1000);
+    disableButtons(setTimerButton);
+    enableButtons(pauseButton, stopButton);
+  }
+});
+
+setTimerButton.addEventListener("click", () => {
+  modal.showModal();
+});
 
 modal.querySelector(".modal__header__close").addEventListener("click", () => {
   modal.close();
@@ -53,30 +81,28 @@ timerForm.addEventListener("submit", (event) => {
   const minutes = parseInt(timerForm.minutes.value) || 0;
   const seconds = parseInt(timerForm.seconds.value) || 0;
 
-  duration = hours * 3600 + minutes * 60 + seconds;
+  const invalid = hours <= 0 && minutes <= 0 && seconds <= 0;
 
-  if (duration <= 0) {
+  if (invalid) {
     return;
   }
 
-  timerInterval = setInterval(() => displayTime(), 1000);
+  timeEnd = Date.now() + (hours * 3600 + minutes * 60 + seconds) * 1000;
 
   timerForm.reset();
   modal.close();
   setTimerButton.disabled = true;
   enableButtons(pauseButton, stopButton);
+  
+  timerInterval = setInterval(() => startTimer(), 1000);
 });
 
 timerForm.addEventListener("reset", () => {
   modal.close();
 });
 
-setTimerButton.addEventListener("click", () => {
-  modal.showModal();
-});
-
 playButton.addEventListener("click", () => {
-  timerInterval = setInterval(() => displayTime(), 1000);
+  timerInterval = setInterval(() => startTimer(), 1000);
   disableButtons(playButton);
   enableButtons(pauseButton);
 });
@@ -89,8 +115,9 @@ pauseButton.addEventListener("click", () => {
 
 stopButton.addEventListener("click", () => {
   clearInterval(timerInterval);
-  duration = 0;
-  displayTime(display);
+  timeInit = 0;
+  timeEnd = 0;
+  displayTime(0);
   setTimerButton.disabled = false;
   disableButtons(playButton, pauseButton, stopButton);
   document.title = "Timer";
