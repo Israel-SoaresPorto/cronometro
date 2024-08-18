@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="css/display.css" />
     <link rel="stylesheet" href="css/button.css" />
     <link rel="stylesheet" href="css/cronometer.css" />
-    <link rel="stylesheet" href="css/timer.css" />
     <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon" />
     <script
       src="https://kit.fontawesome.com/05815059d6.js"
@@ -26,30 +25,32 @@
       </button>
     </header>
     <main class="container">
-      <div class="display">
-        <span id="hours">00</span>
-        <span class="colon">:</span>
-        <span id="minutes">00</span>
-        <span class="colon">:</span>
-        <span id="seconds">00</span>
-        <span class="colon">:</span>
-        <span id="miliseconds">000</span>
+      <div class="cronometer">
+        <div class="display">
+          <span id="hours">00</span>
+          <span class="colon">:</span>
+          <span id="minutes">00</span>
+          <span class="colon">:</span>
+          <span id="seconds">00</span>
+          <span class="colon">:</span>
+          <span id="miliseconds">000</span>
+        </div>
+        <div class="controls">
+          <button class="button__control" id="play">
+            <i class="fa-solid fa-play"></i>
+          </button>
+          <button class="button__control" id="pause" disabled>
+            <i class="fa-solid fa-pause"></i>
+          </button>
+          <button class="button__control" id="partial" disabled>
+            <i class="fa-solid fa-clock"></i>
+          </button>
+          <button class="button__control" id="stop" disabled>
+            <i class="fa-solid fa-stop"></i>
+          </button>
+        </div>
+        <div id="partials-list"></div>
       </div>
-      <div class="controls">
-        <button class="button__control" id="play">
-          <i class="fa-solid fa-play"></i>
-        </button>
-        <button class="button__control" id="pause" disabled>
-          <i class="fa-solid fa-pause"></i>
-        </button>
-        <button class="button__control" id="partial" disabled>
-          <i class="fa-solid fa-clock"></i>
-        </button>
-        <button class="button__control" id="stop" disabled>
-          <i class="fa-solid fa-stop"></i>
-        </button>
-      </div>
-      <div id="partials-list"></div>
     </main>
 
     <script src="js/main.js"></script>
