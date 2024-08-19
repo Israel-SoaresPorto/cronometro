@@ -1,4 +1,4 @@
-import { disableButtons, enableButtons } from "./utils.js";
+import { disableButtons, enableButtons, formatTime } from "./utils.js";
 
 const modal = document.querySelector(".timer__modal");
 const timerForm = document.querySelector(".modal__form");
@@ -23,22 +23,10 @@ function setPauseState(pauseState) {
   sessionStorage.setItem("timerIsPaused", isPaused);
 }
 
-function formatTimerTime(time) {
-  let hours = Math.floor(time / 3600);
-  let minutes = Math.floor((time / 60) % 60);
-  let seconds = Math.floor(time % 60);
-
-  hours = hours < 10 ? "0" + hours : hours;
-  minutes = minutes < 10 ? "0" + minutes : minutes;
-  seconds = seconds < 10 ? "0" + seconds : seconds;
-
-  return [hours, minutes, seconds];
-}
-
 function startTimer() {
   let remaningTime = timeEnd - Date.now();
 
-  displayTime(remaningTime / 1000);
+  displayTime(remaningTime);
 
   if (remaningTime <= 0) {
     resetTimer();
@@ -47,7 +35,7 @@ function startTimer() {
 }
 
 function displayTime(time) {
-  let [hours, minutes, seconds] = formatTimerTime(time);
+  let [hours, minutes, seconds] = formatTime(time);
 
   display.querySelector("#hours").textContent = hours;
   display.querySelector("#minutes").textContent = minutes;
@@ -74,7 +62,7 @@ window.addEventListener("beforeunload", saveTimerState);
 window.addEventListener("load", () => {
   if (timeEnd > 0) {
     if (isPaused) {
-      displayTime(elapsedTime / 1000);
+      displayTime(elapsedTime);
       disableButtons(pauseButton);
       enableButtons(playButton);
     } else {

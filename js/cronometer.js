@@ -1,4 +1,4 @@
-import { disableButtons, enableButtons } from "./utils.js";
+import { disableButtons, enableButtons, formatTime } from "./utils.js";
 
 const display = document.querySelector(".display");
 const btnPlay = document.querySelector("#play");
@@ -39,26 +39,6 @@ function setPartialState(partials) {
   sessionStorage.setItem("cronometerElapsedPartialTime", elapsedPartialTime);
 }
 
-function formatCronometerTime(time) {
-  let hours = Math.floor(time / 3600000);
-  let rest = time % 3600000;
-  let minutes = Math.floor(rest / 60000);
-  let seconds = Math.floor((rest % 60000) / 1000);
-  let milliseconds = rest % 1000;
-
-  hours = hours < 10 ? "0" + hours : hours;
-  minutes = minutes < 10 ? "0" + minutes : minutes;
-  seconds = seconds < 10 ? "0" + seconds : seconds;
-  milliseconds =
-    milliseconds < 10
-      ? "00" + milliseconds
-      : milliseconds < 100
-      ? "0" + milliseconds
-      : milliseconds;
-
-  return [hours, minutes, seconds, milliseconds];
-}
-
 function startCronometer() {
   let timeNow = Date.now();
   let timeDiff = timeNow - timeInit;
@@ -66,7 +46,7 @@ function startCronometer() {
 }
 
 function updateCronometerDisplay(time) {
-  let [hours, minutes, seconds, milliseconds] = formatCronometerTime(time);
+  let [hours, minutes, seconds, milliseconds] = formatTime(time);
 
   display.querySelector("#miliseconds").textContent = milliseconds;
   display.querySelector("#seconds").textContent = seconds;
@@ -101,8 +81,8 @@ function recordPartial() {
 }
 
 function showPartial(partial) {
-  let partialTimeArray = formatCronometerTime(partial.totalTime);
-  let elapsedPartialTimeArray = formatCronometerTime(partial.elapsedTime);
+  let partialTimeArray = formatTime(partial.totalTime);
+  let elapsedPartialTimeArray = formatTime(partial.elapsedTime);
 
   let partialTimeDisplay = `${partialTimeArray[0]} : ${partialTimeArray[1]} : ${partialTimeArray[2]} : ${partialTimeArray[3]}`;
 
@@ -130,7 +110,6 @@ function stopCronometer() {
   partialCount = 0;
   elapsedPartialTime = 0;
   partials = [];
-  document.title = "Cronômetro";
 }
 
 window.addEventListener("load", () => {
@@ -178,10 +157,8 @@ btnStop.addEventListener("click", () => {
   stopCronometer();
   disableButtons(btnPause, btnPartial, btnStop);
   enableButtons(btnPlay);
-  display.querySelector("#miliseconds").textContent = "000";
-  display.querySelector("#seconds").textContent = "00";
-  display.querySelector("#minutes").textContent = "00";
-  display.querySelector("#hours").textContent = "00";
+  updateCronometerDisplay(0);
+  document.title = "Cronômetro";
   partialsList.innerHTML = "";
   setPartialState([]);
   setCronometerPauseState(false);
