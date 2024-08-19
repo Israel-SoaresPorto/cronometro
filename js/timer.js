@@ -8,13 +8,19 @@ const playButton = document.querySelector("#play");
 const pauseButton = document.querySelector("#pause");
 const stopButton = document.querySelector("#stop");
 
-let timeInit = 0;
-let elapsedTime = 0;
+let elapsedTime = parseInt(sessionStorage.getItem("timerElapsedTime")) || 0;
 let timerInterval;
 let timeEnd = parseInt(sessionStorage.getItem("timerEnd")) || 0;
+let isPaused = sessionStorage.getItem("timerIsPaused") === "true";
 
 function saveTimerState() {
   sessionStorage.setItem("timerEnd", timeEnd);
+  sessionStorage.setItem("timerElapsedTime", elapsedTime);
+}
+
+function setPauseState(pauseState) {
+  isPaused = pauseState;
+  sessionStorage.setItem("timerIsPaused", isPaused);
 }
 
 function formatTimerTime(time) {
@@ -30,17 +36,12 @@ function formatTimerTime(time) {
 }
 
 function startTimer() {
-  timeInit = Date.now() - elapsedTime;
-
-  let remaningTime = timeEnd - timeInit;
+  let remaningTime = timeEnd - Date.now();
 
   displayTime(remaningTime / 1000);
 
   if (remaningTime <= 0) {
-    clearInterval(timerInterval);
-    setTimerButton.disabled = false;
-    disableButtons(playButton, pauseButton, stopButton);
-    document.title = "Timer";
+    resetTimer();
     return;
   }
 }
@@ -51,18 +52,38 @@ function displayTime(time) {
   display.querySelector("#hours").textContent = hours;
   display.querySelector("#minutes").textContent = minutes;
   display.querySelector("#seconds").textContent = seconds;
-  
-  document.title = `${hours}:${minutes}:${seconds} | Timer`;
 
+  document.title = `${hours}:${minutes}:${seconds} | Timer`;
+}
+
+function resetTimer() {
+  clearInterval(timerInterval);
+  timeEnd = 0;
+  elapsedTime = 0;
+  /* limpa o display do timer, para evitar números negativos quando o tempo acabar ou quando o timer por parado, evitar que o tempo restante fique visível na tela. */
+  displayTime(0);
+  setTimerButton.disabled = false;
+  disableButtons(playButton, pauseButton, stopButton);
+  document.title = "Timer";
+  setPauseState(false);
+  saveTimerState();
 }
 
 window.addEventListener("beforeunload", saveTimerState);
 
 window.addEventListener("load", () => {
   if (timeEnd > 0) {
-    timerInterval = setInterval(() => startTimer(), 1000);
-    disableButtons(setTimerButton);
-    enableButtons(pauseButton, stopButton);
+    if (isPaused) {
+      displayTime(elapsedTime / 1000);
+      disableButtons(pauseButton);
+      enableButtons(playButton);
+    } else {
+      timerInterval = setInterval(() => startTimer(), 1000);
+      disableButtons(playButton);
+      enableButtons(pauseButton, stopButton);
+    }
+
+    setTimerButton.disabled = true;
   }
 });
 
@@ -87,13 +108,14 @@ timerForm.addEventListener("submit", (event) => {
     return;
   }
 
-  timeEnd = Date.now() + (hours * 3600 + minutes * 60 + seconds) * 1000;
+  // há um pequeno atraso de 2 segundos para o timer começar, por isso a soma de 2 segundos ao tempo final.
+  timeEnd = Date.now() + (hours * 3600 + minutes * 60 + seconds) * 1000 + 2000;
 
   timerForm.reset();
   modal.close();
   setTimerButton.disabled = true;
   enableButtons(pauseButton, stopButton);
-  
+
   timerInterval = setInterval(() => startTimer(), 1000);
 });
 
@@ -102,23 +124,21 @@ timerForm.addEventListener("reset", () => {
 });
 
 playButton.addEventListener("click", () => {
+  timeEnd = Date.now() + elapsedTime;
   timerInterval = setInterval(() => startTimer(), 1000);
+  setPauseState(false);
   disableButtons(playButton);
-  enableButtons(pauseButton);
+  enableButtons(pauseButton, stopButton);
 });
 
 pauseButton.addEventListener("click", () => {
   clearInterval(timerInterval);
+  elapsedTime = timeEnd - Date.now();
+  setPauseState(true);
   disableButtons(pauseButton);
-  enableButtons(playButton);
+  enableButtons(playButton, stopButton);
 });
 
 stopButton.addEventListener("click", () => {
-  clearInterval(timerInterval);
-  timeInit = 0;
-  timeEnd = 0;
-  displayTime(0);
-  setTimerButton.disabled = false;
-  disableButtons(playButton, pauseButton, stopButton);
-  document.title = "Timer";
+  resetTimer();
 });
