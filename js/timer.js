@@ -8,30 +8,23 @@ const pauseButton = document.querySelector("#pause");
 const stopButton = document.querySelector("#stop");
 const configTimerButton = document.querySelector("#config");
 
-let elapsedTime = parseInt(sessionStorage.getItem("timerElapsedTime")) || 0;
+let lastDefinedDuration = sessionStorage.getItem("lastDefinedDuration") || 0;
+let duration = sessionStorage.getItem("lastTimerDuration") || 0;
 let timerInterval;
-let timeEnd = parseInt(sessionStorage.getItem("timerEnd")) || 0;
-let isPaused = sessionStorage.getItem("timerIsPaused") === "true";
 
-function saveTimerState() {
-  sessionStorage.setItem("timerEnd", timeEnd);
-  sessionStorage.setItem("timerElapsedTime", elapsedTime);
-}
-
-function setPauseState(pauseState) {
-  isPaused = pauseState;
-  sessionStorage.setItem("timerIsPaused", isPaused);
+function saveLastTimerDuration() {
+  sessionStorage.setItem("lastDefinedDuration", lastDefinedDuration);
 }
 
 function startTimer() {
-  let remaningTime = timeEnd - Date.now();
+  displayTime(duration);
 
-  displayTime(remaningTime);
-
-  if (remaningTime <= 0) {
+  if (duration <= 0) {
     resetTimer();
     return;
   }
+
+  duration -= 1000;
 }
 
 function displayTime(time) {
@@ -46,32 +39,26 @@ function displayTime(time) {
 
 function resetTimer() {
   clearInterval(timerInterval);
-  timeEnd = 0;
-  elapsedTime = 0;
+  duration = 0;
+  lastDefinedDuration = 0;
   /* limpa o display do timer, para evitar números negativos quando o tempo acabar ou quando o timer por parado, evitar que o tempo restante fique visível na tela. */
   displayTime(0);
   disableButtons(playButton, pauseButton, stopButton);
   enableButtons(configTimerButton);
   document.title = "Timer";
-  setPauseState(false);
-  saveTimerState();
+  saveLastTimerDuration();
 }
 
 window.addEventListener("beforeunload", () => {
-  saveTimerState();
+  saveLastTimerDuration();
 });
 
 window.addEventListener("load", () => {
-  if (timeEnd > 0) {
-    if (isPaused) {
-      displayTime(elapsedTime);
-      disableButtons(pauseButton, configTimerButton);
-      enableButtons(playButton);
-    } else {
-      timerInterval = setInterval(() => startTimer(), 1000);
-      disableButtons(playButton, configTimerButton);
-      enableButtons(pauseButton, stopButton);
-    }
+  if (lastDefinedDuration > 0) {
+    duration = lastDefinedDuration;
+    displayTime(duration);
+    disableButtons(pauseButton, stopButton, configTimerButton);
+    enableButtons(playButton);
   }
 });
 
@@ -86,17 +73,17 @@ timerForm.addEventListener("submit", (event) => {
   const minutes = parseInt(timerForm.minutes.value) || 0;
   const seconds = parseInt(timerForm.seconds.value) || 0;
 
-  const invalid = hours <= 0 && minutes <= 0 && seconds <= 0;
+  duration = (hours * 3600 + minutes * 60 + seconds) * 1000;
 
-  if (invalid) {
+  if (duration <= 0) {
     return;
   }
 
-  // há um pequeno atraso de 2 segundos para o timer começar, por isso a soma de 2 segundos ao tempo final.
-  timeEnd = Date.now() + (hours * 3600 + minutes * 60 + seconds) * 1000 + 2000;
-
   timerForm.reset();
   modal.close();
+  lastDefinedDuration = duration;
+  saveLastTimerDuration();
+
   disableButtons(configTimerButton);
   enableButtons(pauseButton, stopButton);
 
@@ -108,17 +95,13 @@ timerForm.addEventListener("reset", () => {
 });
 
 playButton.addEventListener("click", () => {
-  timeEnd = Date.now() + elapsedTime;
   timerInterval = setInterval(() => startTimer(), 1000);
-  setPauseState(false);
   disableButtons(playButton);
   enableButtons(pauseButton, stopButton);
 });
 
 pauseButton.addEventListener("click", () => {
   clearInterval(timerInterval);
-  elapsedTime = timeEnd - Date.now();
-  setPauseState(true);
   disableButtons(pauseButton);
   enableButtons(playButton, stopButton);
 });
