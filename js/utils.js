@@ -1,15 +1,20 @@
+// Funções utilitárias para o projeto
+
+// Função para habilitar botões
 function enableButtons(...buttons) {
   buttons.forEach(button => {
     button.disabled = false;
   });
 }
 
+// Função para desabilitar botões
 function disableButtons(...buttons) {
   buttons.forEach(button => {
     button.disabled = true;
   });
 }
 
+// Função para formatar o tempo
 function formatTime(time) {
   let hours = Math.floor(time / 3600000);
   let rest = time % 3600000;
