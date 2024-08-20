@@ -2,11 +2,11 @@ import { disableButtons, enableButtons, formatTime } from "./utils.js";
 
 const modal = document.querySelector(".timer__modal");
 const timerForm = document.querySelector(".modal__form");
-const setTimerButton = document.querySelector(".timer__open-modal");
 const display = document.querySelector(".display");
 const playButton = document.querySelector("#play");
 const pauseButton = document.querySelector("#pause");
 const stopButton = document.querySelector("#stop");
+const configTimerButton = document.querySelector("#config");
 
 let elapsedTime = parseInt(sessionStorage.getItem("timerElapsedTime")) || 0;
 let timerInterval;
@@ -50,8 +50,8 @@ function resetTimer() {
   elapsedTime = 0;
   /* limpa o display do timer, para evitar números negativos quando o tempo acabar ou quando o timer por parado, evitar que o tempo restante fique visível na tela. */
   displayTime(0);
-  setTimerButton.disabled = false;
   disableButtons(playButton, pauseButton, stopButton);
+  enableButtons(configTimerButton);
   document.title = "Timer";
   setPauseState(false);
   saveTimerState();
@@ -63,20 +63,14 @@ window.addEventListener("load", () => {
   if (timeEnd > 0) {
     if (isPaused) {
       displayTime(elapsedTime);
-      disableButtons(pauseButton);
+      disableButtons(pauseButton, configTimerButton);
       enableButtons(playButton);
     } else {
       timerInterval = setInterval(() => startTimer(), 1000);
-      disableButtons(playButton);
+      disableButtons(playButton, configTimerButton);
       enableButtons(pauseButton, stopButton);
     }
-
-    setTimerButton.disabled = true;
   }
-});
-
-setTimerButton.addEventListener("click", () => {
-  modal.showModal();
 });
 
 modal.querySelector(".modal__header__close").addEventListener("click", () => {
@@ -101,7 +95,7 @@ timerForm.addEventListener("submit", (event) => {
 
   timerForm.reset();
   modal.close();
-  setTimerButton.disabled = true;
+  disableButtons(configTimerButton);
   enableButtons(pauseButton, stopButton);
 
   timerInterval = setInterval(() => startTimer(), 1000);
@@ -129,4 +123,8 @@ pauseButton.addEventListener("click", () => {
 
 stopButton.addEventListener("click", () => {
   resetTimer();
+});
+
+configTimerButton.addEventListener("click", () => {
+  modal.showModal();
 });

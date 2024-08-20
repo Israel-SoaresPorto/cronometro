@@ -80,7 +80,7 @@ body.light .timer__open-modal {
     font-size: 0.8em;
 }
 
-.modal__form-inputs__group input {
+.modal__form__input {
     width: 4em;
     text-align: center;
     padding: 0.5em;

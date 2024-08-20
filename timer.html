@@ -36,8 +36,10 @@
               <div class="modal__form-inputs__group">
                 <label for="hours">Horas</label>
                 <input
+                  aria-description="Digite as horas(entre 0 e 99)"
                   type="number"
                   id="hours"
+                  class="modal__form__input"
                   name="hours"
                   min="0"
                   max="23"
@@ -47,8 +49,10 @@
               <div class="modal__form-inputs__group">
                 <label for="minutes">Minutos</label>
                 <input
+                  aria-description="Digite os minutos(entre 0 e 59)"
                   type="number"
                   id="minutes"
+                  class="modal__form__input"
                   name="minutes"
                   min="0"
                   max="59"
@@ -58,8 +62,10 @@
               <div class="modal__form-inputs__group">
                 <label for="seconds">Segundos</label>
                 <input
+                  aria-description="Digite os segundos(entre 0 e 59)"
                   type="number"
                   id="seconds"
+                  class="modal__form__input"
                   name="seconds"
                   min="0"
                   max="59"
@@ -77,7 +83,6 @@
             </div>
           </form>
         </dialog>
-        <button class="timer__open-modal">Iniciar o Timer</button>
         <div class="display">
           <span id="hours">00</span>
           <span class="colon">:</span>
@@ -86,14 +91,40 @@
           <span id="seconds">00</span>
         </div>
         <div class="timer__controls">
-          <button class="button__control" id="play" disabled>
+          <button
+            aria-label="play-timer"
+            aria-description="Reiniciar o timer"
+            class="button__control"
+            id="play"
+            disabled
+          >
             <i class="fa-solid fa-play"></i>
           </button>
-          <button class="button__control" id="pause" disabled>
+          <button
+            aria-label="pause-timer"
+            aria-description="Pausar o timer"
+            class="button__control"
+            id="pause"
+            disabled
+          >
             <i class="fa-solid fa-pause"></i>
           </button>
-          <button class="button__control" id="stop" disabled>
+          <button
+            aria-label="stop-timer"
+            aria-description="Parar o timer"
+            class="button__control"
+            id="stop"
+            disabled
+          >
             <i class="fa-solid fa-stop"></i>
+          </button>
+          <button
+            aria-label="config-timer"
+            aria-description="Iniciar/Configurar o timer"
+            class="button__control"
+            id="config"
+          >
+            <i class="fa-solid fa-gear"></i>
           </button>
         </div>
       </div>

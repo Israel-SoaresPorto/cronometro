@@ -22,11 +22,11 @@
   background-color: #e63a2d;
 }
 
-#partial {
+#partial, #config {
   background-color: #00b1f7;
 }
 
-#partial:hover {
+#partial:hover, #config:hover {
   background-color: #0099d9;
 }
 
@@ -40,6 +40,30 @@
   align-items: center;
   justify-content: center;
   gap: 0.25em;
+}
+
+.button__control[aria-description] {
+  position: relative;
+}
+
+.button__control[aria-description]::after {
+  content: attr(aria-description);
+  width: max-content;
+  background-color: var(--dark-primary-color);
+  color: var(--light-font-color);
+  padding: 0.5em;
+  border-radius: 0.25em;
+  font-size: 0.75em;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  opacity: 0;
+  transition: opacity ease 0.5s;
+}
+
+.button__control[aria-description]:hover::after {
+  opacity: 1;
 }
 
 .fa-solid {
