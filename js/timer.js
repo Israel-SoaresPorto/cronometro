@@ -57,7 +57,9 @@ function resetTimer() {
   saveTimerState();
 }
 
-window.addEventListener("beforeunload", saveTimerState);
+window.addEventListener("beforeunload", () => {
+  saveTimerState();
+});
 
 window.addEventListener("load", () => {
   if (timeEnd > 0) {
