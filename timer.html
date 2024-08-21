@@ -1,11 +1,9 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-bs-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/display.css" />
-    <link rel="stylesheet" href="css/button.css" />
+    <link rel="stylesheet" href="css/main.css" />
     <link rel="stylesheet" href="css/timer.css" />
     <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon" />
     <script
@@ -20,55 +18,55 @@
     />
     <title>Timer</title>
   </head>
-  <body>
-    <header class="header">
-      <nav class="nav">
+  <body class="vh-100">
+    <header class="header fs-5 d-flex align-items-center justify-content-center gap-4">
+      <nav class="nav gap-4">
         <a href="index.html" class="nav__link">Cronômetro</a>
         <a href="timer.html" class="nav__link">Timer</a>
       </nav>
-      <button id="change-theme">
+      <button class="btn border-0 fs-5" id="change-theme">
         <i class="fa-solid fa-circle-half-stroke"></i>
       </button>
     </header>
-    <main class="container">
+    <main class="main d-flex justify-content-center align-items-center">
       <div class="timer">
-        <dialog class="timer__modal">
-          <div class="modal__header">
-            <h2>Iniciar o Timer</h2>
-            <button class="modal__header__close">&times</button>
+        <dialog class="timer__modal p-0 border-0">
+          <div class="modal__header bg-secondary p-3 mb-3 d-flex align-items-center justify-content-between">
+            <h2 class="m-0">Iniciar o Timer</h2>
+            <button class="modal__header__close btn-close fs-6 border-0 rounded-0"></button>
           </div>
-          <form class="modal__form" formmethod="dialog">
-            <div class="modal__form-inputs">
-              <div class="modal__form-inputs__group">
-                <label for="hours">Horas</label>
+          <form class="modal__form d-flex flex-column align-items-center gap-3" formmethod="dialog">
+            <div class="input-group justify-content-center gap-4">
+              <div class="d-flex flex-column align-items-center gap-2">
+                <label for="hours" class="text-black fs-6">Horas</label>
                 <input
                   type="number"
                   id="hours"
-                  class="modal__form__input"
+                  class="input-group-text bg-white border-secondary rounded-0 text-black fs-5"
                   name="hours"
                   min="0"
-                  max="23"
+                  max="99"
                   step="1"
                 />
               </div>
-              <div class="modal__form-inputs__group">
-                <label for="minutes">Minutos</label>
+              <div class="d-flex flex-column align-items-center gap-2">
+                <label for="minutes" class="text-black fs-6">Minutos</label>
                 <input
                   type="number"
                   id="minutes"
-                  class="modal__form__input"
+                  class="input-group-text bg-white border-secondary rounded-0 text-black fs-5"
                   name="minutes"
                   min="0"
                   max="59"
                   step="1"
                 />
               </div>
-              <div class="modal__form-inputs__group">
-                <label for="seconds">Segundos</label>
+              <div class="d-flex flex-column align-items-center gap-2">
+                <label for="seconds" class="text-black fs-6">Segundos</label>
                 <input
                   type="number"
                   id="seconds"
-                  class="modal__form__input"
+                  class="input-group-text bg-white border-secondary rounded-0 text-black fs-5"
                   name="seconds"
                   min="0"
                   max="59"
@@ -76,28 +74,28 @@
                 />
               </div>
             </div>
-            <div class="modal__form-actions">
-              <button type="submit" class="modal__form-actions__button">
+            <div class="p-2 d-flex flex-row-reverse justify-content-center gap-3 flex-grow-1">
+              <button type="submit" class="btn btn-primary border-0 rounded-0">
                 Iniciar
               </button>
-              <button type="reset" class="modal__form-actions__button">
+              <button type="reset" class="btn btn-danger border-0 rounded-0">
                 Cancelar
               </button>
             </div>
           </form>
         </dialog>
-        <div class="display">
+        <div class="display text-center d-flex justify-content-evenly gap-2">
           <span id="hours">00</span>
           <span class="colon">:</span>
           <span id="minutes">00</span>
           <span class="colon">:</span>
           <span id="seconds">00</span>
         </div>
-        <div class="timer__controls">
+        <div class="controls d-flex align-items-center justify-content-center gap-3">
           <button
             aria-label="play-timer"
             aria-description="Retornar o timer"
-            class="button__control"
+            class="btn-control btn border-0 rounded-circle fs-3"
             id="play"
             disabled
           >
@@ -106,7 +104,7 @@
           <button
             aria-label="pause-timer"
             aria-description="Pausar o timer"
-            class="button__control"
+            class="btn-control btn border-0 rounded-circle fs-3"
             id="pause"
             disabled
           >
@@ -115,7 +113,7 @@
           <button
             aria-label="stop-timer"
             aria-description="Parar o timer"
-            class="button__control"
+            class="btn-control btn border-0 rounded-circle fs-3"
             id="stop"
             disabled
           >
@@ -124,7 +122,7 @@
           <button
             aria-label="config-timer"
             aria-description="Iniciar/Configurar o timer"
-            class="button__control"
+            class="btn-control btn border-0 rounded-circle fs-3"
             id="config"
           >
             <i class="fa-solid fa-gear"></i>

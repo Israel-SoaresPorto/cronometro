@@ -6,16 +6,18 @@ let theme = localStorage.getItem('theme');
 
 // inicializa o tema salvo
 if(theme === "light") {
-    document.body.classList.add("light");
+    document.documentElement.dataset.bsTheme = "light";
 }
 
 // adiciona um evento de clique ao botão de mudar o tema
 changeThemeButton.addEventListener('click', () => {
-    if(document.body.classList.contains('light')) {
-        document.body.classList.remove('light');
-        localStorage.setItem("theme", "dark");
+    if(theme === "light") {
+        theme = "dark";
+        document.documentElement.dataset.bsTheme = "dark";
+        localStorage.setItem("theme", theme);
     } else {
-        document.body.classList.add('light');
-        localStorage.setItem("theme", "light");
+        theme = "light";
+        document.documentElement.dataset.bsTheme = "light";
+        localStorage.setItem("theme", theme);
     }
 });

@@ -1,118 +1,17 @@
-.timer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-}
-
-.timer__open-modal {
-    font-size: 1rem;
-    background-color: var(--dark-primary-color);
-    color: var(--light-font-color);
-    border: none;
-    outline: none;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-}
-
-body.light .timer__open-modal {
-    background-color: var(--light-primary-color);
-    color: var(--dark-font-color);
-}
-
-.timer__open-modal:disabled {
-    display: none;
-}
-
 .timer__modal {
-    background-color: #e9e4e4;
+    width: 20em;
+    font-family: "Roboto", sans-serif;
+    background-color: #d4d1d1;
     font-size: 1rem;
-    padding: 1em;
-    border: none;
-    position: fixed;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
 }
 
 .timer__modal::backdrop {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-.modal__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1em;
-}
-
-.modal__header__close {
-    background-color: transparent;
-    font-size: 1.5em;
-    border: none;
-    outline: none;
-    cursor: pointer;
-
-}
-
-.modal__form {
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-}
-
-.modal__form-inputs {
-    display: flex;
-    justify-content: space-between;
-    gap: 1em;
-}
-
-.modal__form-inputs__group {
-    width: 5em;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5em;
-}
-
-.modal__form-inputs__group label {
-    font-size: 0.8em;
-}
-
-.modal__form__input {
+.input-group-text {
     width: 4em;
-    text-align: center;
-    padding: 0.5em;
-    border: 1px solid #ccc;
     outline: none;
-}
-
-.modal__form-actions {
-   display: flex;
-   flex-direction: row-reverse;
-   justify-content: center;
-   gap: 1em;
-}
-
-.modal__form-actions button {
-    padding: 0.5em 1em;
-    color: white;
-    border: none;
-    outline: none;
-    cursor: pointer;
-}
-
-.modal__form-actions button[type="submit"] {
-    background-color: #007bff;
-}
-
-.modal__form-actions button[type="reset"] {
-    color: #000000;
-}
-
-.timer__controls {
-    display: flex;
-    gap: 1rem;
+    border-radius: 0;
 }
 

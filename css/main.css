@@ -1,0 +1,100 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+@font-face {
+  font-family: "Ds-Digital";
+  src: url("../assets/fonts/DS-DIGI.TTF");
+  src: url("../assets/fonts/DS-DIGIB.TTF");
+  src: url("../assets/fonts/DS-DIGII.TTF");
+  src: url("../assets/fonts/DS-DIGIT.TTF");
+}
+
+[data-bs-theme="dark"] {
+  --bs-body-bg: #000000 !important;
+  --bs-body-color: #ffffff !important;
+}
+
+[data-bs-theme="light"] {
+  --bs-body-bg: #ffffff !important;
+  --bs-body-color: #000000 !important;
+}
+
+.header {
+  font-family: "Roboto", sans-serif;
+  height: 10vh;
+}
+
+.nav__link {
+  color: #ffffff;
+  font-size: 1em;
+  text-decoration: none;
+}
+
+[data-bs-theme="light"] .nav__link {
+  color: #000000;
+}
+
+.main {
+  height: 90vh;
+  font-size: 4em;
+}
+
+.display {
+  font-family: "Ds-Digital", sans-serif;
+}
+
+.display span:not(.colon) {
+  width: 1em;
+}
+
+#miliseconds {
+  width: 1.5em;
+}
+
+.colon {
+  width: 0.25em;
+}
+
+.btn-control .fa-solid {
+  color: #000000;
+  font-size: 1em;
+  width: 1em;
+}
+
+.btn {
+  padding: 1rem;
+}
+
+#play {
+  background-color: #51d131;
+}
+
+#pause {
+  background-color: #f7b500;
+}
+
+#stop {
+  background-color: #f44336;
+}
+
+#partial,
+#config {
+  background-color: #00b1f7;
+}
+
+@media screen and (min-width: 27em) {
+  .main {
+    font-size: 5em;
+  }
+}
+
+@media screen and (min-width: 48em) {
+  .main {
+    font-size: 6em;
+  }
+}
+
+@media screen and (min-width: 90em) {
+  .main {
+    font-size: 7em;
+  }
+}
