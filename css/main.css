@@ -47,7 +47,7 @@
 }
 
 #miliseconds {
-  width: 1.5em;
+  width: 1.6em;
 }
 
 .colon {
@@ -55,8 +55,6 @@
 }
 
 .btn-control .fa-solid {
-  color: #000000;
-  font-size: 1em;
   width: 1em;
 }
 
