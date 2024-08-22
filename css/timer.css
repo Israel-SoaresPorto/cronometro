@@ -1,3 +1,7 @@
+.timer {
+    font-size: 1.15em;
+}
+
 .timer__modal {
     width: 20em;
     font-family: "Roboto", sans-serif;

@@ -18,7 +18,7 @@
     />
     <title>Timer</title>
   </head>
-  <body class="vh-100">
+  <body class="vh-100 fs-1">
     <header class="header fs-5 d-flex align-items-center justify-content-center gap-4">
       <nav class="nav gap-4">
         <a href="index.html" class="nav__link">Cronômetro</a>
@@ -29,11 +29,11 @@
       </button>
     </header>
     <main class="main d-flex justify-content-center align-items-center">
-      <div class="timer">
+      <div class="timer text-center d-flex flex-column justify-content-center">
         <dialog class="timer__modal p-0 border-0">
           <div class="modal__header bg-secondary p-3 mb-3 d-flex align-items-center justify-content-between">
-            <h2 class="m-0">Iniciar o Timer</h2>
-            <button class="modal__header__close btn-close fs-6 border-0 rounded-0"></button>
+            <span class="m-0">Iniciar o Timer</span>
+            <button class="modal__header__close btn-close border-0 rounded-0"></button>
           </div>
           <form class="modal__form d-flex flex-column align-items-center gap-3" formmethod="dialog">
             <div class="input-group justify-content-center gap-4">
@@ -95,7 +95,7 @@
           <button
             aria-label="play-timer"
             aria-description="Retornar o timer"
-            class="btn-control btn border-0 rounded-circle fs-3"
+            class="btn-control btn border-0 rounded-circle fs-4"
             id="play"
             disabled
           >
@@ -104,7 +104,7 @@
           <button
             aria-label="pause-timer"
             aria-description="Pausar o timer"
-            class="btn-control btn border-0 rounded-circle fs-3"
+            class="btn-control btn border-0 rounded-circle fs-4"
             id="pause"
             disabled
           >
@@ -113,7 +113,7 @@
           <button
             aria-label="stop-timer"
             aria-description="Parar o timer"
-            class="btn-control btn border-0 rounded-circle fs-3"
+            class="btn-control btn border-0 rounded-circle fs-4"
             id="stop"
             disabled
           >
@@ -122,7 +122,7 @@
           <button
             aria-label="config-timer"
             aria-description="Iniciar/Configurar o timer"
-            class="btn-control btn border-0 rounded-circle fs-3"
+            class="btn-control btn border-0 rounded-circle fs-4"
             id="config"
           >
             <i class="fa-solid fa-gear"></i>
