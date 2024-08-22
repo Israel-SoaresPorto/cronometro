@@ -18,18 +18,18 @@
     />
     <title>Cronômetro</title>
   </head>
-  <body class="vh100">
-    <header class="header fs-5 d-flex align-items-center justify-content-center gap-4">
+  <body class="vh100 fs-1">
+    <header class="header fs-4 d-flex align-items-center justify-content-center gap-4">
       <nav class="nav gap-4">
         <a href="index.html" class="nav__link">Cronômetro</a>
         <a href="timer.html" class="nav__link">Timer</a>
       </nav>
-      <button class="btn border-0 fs-5" id="change-theme">
+      <button class="btn border-0 fs-4" id="change-theme">
         <i class="fa-solid fa-circle-half-stroke"></i>
       </button>
     </header>
     <main class="main d-flex justify-content-center">
-      <div class="cronometer">
+      <div class="cronometer mt-4 d-flex flex-column">
         <div class="display text-center d-flex justify-content-evenly gap-2">
           <span id="hours">00</span>
           <span class="colon">:</span>
@@ -43,7 +43,7 @@
           <button
             aria-label="play-cronometer"
             aria-description="Iniciar/Retornar o cronômetro"
-            class="btn-control text-black btn border-0 rounded-circle fs-3"
+            class="btn-control btn border-0 rounded-circle fs-4"
             id="play"
           >
             <i class="fa-solid fa-play"></i>
@@ -51,7 +51,7 @@
           <button
             aria-label="pause-cronometer"
             aria-description="Pausar o cronômetro"
-            class="button__control"
+            class="btn-control btn border-0 rounded-circle fs-4"
             id="pause"
             disabled
           >
@@ -60,7 +60,7 @@
           <button
             aria-label="partial-cronometer"
             aria-description="Registrar o tempo parcial"
-            class="button__control"
+            class="btn-control btn border-0 rounded-circle fs-4"
             id="partial"
             disabled
           >
@@ -69,14 +69,14 @@
           <button
             aria-label="stop-cronometer"
             aria-description="Parar o cronômetro"
-            class="button__control"
+            class="btn-control btn border-0 rounded-circle fs-4"
             id="stop"
             disabled
           >
             <i class="fa-solid fa-stop"></i>
           </button>
         </div>
-        <div id="partials-list"></div>
+        <div id="partials-list" class="my-4 d-flex flex-column align-items-center gap-3"></div>
       </div>
     </main>
 

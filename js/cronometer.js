@@ -78,7 +78,7 @@ function recordPartial() {
 
   // Cria um elemento para exibir a parcial
   let partialTimeElement = document.createElement("div");
-  partialTimeElement.classList.add("partial");
+  partialTimeElement.classList.add("partial", "w-100", "d-flex", "align-items-center", "justify-content-between", "p-2","gap-2", "text-center");
 
   // Atualiza o conteúdo do elemento
   partialTimeElement.innerHTML = `
